@@ -1,0 +1,11 @@
+includes:
+  - vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+  level: 0  # Adjust this for stricter checking (levels 1-9)
+  paths:
+    - app
+    - database
+    - tests
+
+# You can add additional configurations here if needed

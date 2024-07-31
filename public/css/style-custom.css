@@ -1,0 +1,343 @@
+.payslip-pdf-view {
+    float: none;
+    margin: 0 auto;
+}
+
+.payslip-view {
+    float: none;
+    margin: 0 auto;
+}
+
+.payslip-table {
+    margin-top: 12%;
+}
+
+table.table.m-auto.text-center.payslip-table {
+    border: 0;
+    border-color: #e6eaec;
+}
+
+table.table.payslip-table > thead:first-child > tr > th {
+    border-bottom: 0;
+}
+
+table.table.payslip-table thead tr:first-child {
+    border-top: 1px solid #e6eaec;
+}
+
+#update-payroll-status {
+    font-size: 12px;
+}
+
+#label_export_error_message {
+    display: none;
+}
+
+.breadcrumbs-outer-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 41px 10px 20px;
+}
+
+@media screen and (max-width: 1399px) {
+    table.sessionTable {
+        table-layout: fixed;
+    }
+}
+
+.invoice-list-number + .tooltip {
+    white-space: pre-wrap;
+}
+
+.invoice-list-number + .tooltip .tooltip-inner {
+    text-align: left;
+    padding: 10px;
+}
+
+#qa-report-img div,
+#issue-records-img div {
+    background: none;
+    text-align: center;
+    top: 12%;
+    box-shadow: none;
+}
+
+#issue-records-table td img,
+#qa-report-table td img {
+    width: 150px !important;
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+}
+@media screen and (min-width: 800px) {
+    #qa-report-img img,
+    #issue-records-img img {
+        width: auto;
+        border: 5px solid rgb(253, 249, 249);
+        max-width: 1000px;
+        border-radius: 6px;
+    }
+}
+@media screen and (max-width: 800px) {
+    #qa-report-img img,
+    #issue-records-img img {
+        width: auto;
+        border: 5px solid rgb(253, 249, 249);
+        max-width: 480px;
+        border-radius: 6px;
+    }
+}
+
+.file-upload-group{
+    display: flex;
+    align-items: center;
+}
+.file-upload-group .form-control {
+    width: 9%;
+    height: 37px;
+    display: flex;
+    align-items: center;
+}
+.file-upload-group  .btn.fileinput-exists{
+    height: 37px;
+    background-color: #ccc;
+  }
+.upload-file-width{
+    width: 75%;
+}
+@media screen and (max-width: 540px) {
+    #edit_client .modal-body {
+        padding: 20px 20px 30px 20px;
+    }
+    .file-upload-group .btn.fileinput-exists {
+        height: 37px;
+        background-color: #ccc;
+        font-size: 12px;
+        padding: 0px 7px;
+    }
+    .upload-file-width input{
+        width: 100%;
+    }
+    .upload-file-width {
+        width: auto;
+    }
+}
+
+.recruitment-date-filter {
+    padding: 0 29px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+.dashboard-table div.dataTables_wrapper div.dataTables_info{
+    white-space: pre-wrap;
+}
+
+.dashboard-table.table-responsive > div.dataTables_wrapper > div.row:first-child {
+    float: right;
+    width: 100%;
+}
+
+@media screen and (max-width: 1440px) {
+    .dashboard-table div.dataTables_wrapper div.dataTables_filter label{
+        white-space: normal;
+        text-align: right;
+        width: 100%;
+        padding-right: 13px;
+    }
+    .dashboard-table div.dataTables_wrapper div.dataTables_filter input{
+        width: 100%;
+    }
+    .dashboard-table div.dataTables_wrapper div.dataTables_length label{
+        margin-top: 16px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .dashboard-table.table-responsive > div.dataTables_wrapper > div.row:first-child > div[class^="col-"]{
+        padding-left: 0;
+    }
+}
+
+.index-top{
+    position: relative;
+    z-index: 1;
+}
+.index-bottom{
+    position: relative;
+    z-index: 0;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.custom-field-wrap {
+    display: flex;
+}
+
+.custom-field-wrap-addon {
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+}
+
+.custom-field-wrap .form-control + .form-control {
+    margin-left: 10px;
+}
+
+.custom-field-wrap-addon .form-control + .form-control {
+    margin-left: 10px;
+}
+
+input#company_bankaccount_details {
+    margin: 0 0 0 10px;
+}
+
+.nowrap {
+    white-space:nowrap;
+}
+.label-critical,
+.badge-critical {
+  background-color: #ff001b;
+  color: #FFFFFF;
+}
+.agile-list li.critical-element {
+    border-left: 3px solid #ff001b;
+}
+.col-width {
+    width : 10%;
+}
+.input-group .input-group-btn{
+    height: 34px;
+}
+.input-group .input-group-btn .btn{
+    height: 34px;
+    line-height: 1;
+}
+.chosen-container-single.mb-2,
+.form-control.mb-2{
+    margin-bottom: 15px;
+}
+.w-full{
+    width: 100%;
+}
+.chosen-select-mobile .chosen-container-single{
+    margin-bottom: 15px;
+}
+
+.hide-link {
+    pointer-events: none;
+    color: #ccc;
+}
+
+#delete_asset_document{
+    z-index: 100010!important;
+}
+
+#delete_asset_document .modal-dialog{
+    margin-top: 90px;
+}
+.btn-aqua {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+a.btn.btn-aqua:hover,
+a.btn.btn-aqua:focus{
+    color: #fff;
+}
+
+body .toggle-nav-user .fa-angle-left {
+    line-height: unset!important;
+}
+
+.project-cost-report-filter{
+    width: 100%;
+}
+
+.project-cost-report-filter .chosen-container{
+    width: 100% !important;
+}
+
+#project-cost-table-container .ibox-content{
+    padding: 8px;
+}
+
+.filter-button-group {
+    float: right;
+}
+
+.filter-button-group .form-group {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+#add-team-form .submit-section {
+    margin-top: 20px;
+}
+
+#my-team-timesheet-filter-form {
+    margin-top: 0;
+}
+
+#my-team-timesheet-filter-form .form-control {
+    height: 35px;
+}
+
+.manage-team-btn {
+    margin-top: -15px!important;
+}
+
+.swal2-backdrop-show {
+    z-index: 99999 !important;
+}
+
+.nav-second-level{
+    padding-right: 0px !important;
+}
+
+body.mini-navbar .navbar-default .nav>li>.nav-second-level li a span{
+    display: block !important;
+}
+
+@media screen and (min-width: 800px) {
+    .task-project-credentials a,
+    .task-project-credentials p {
+        display: block;
+        width: auto;
+        max-width: 300px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .task-project-credentials a,
+    .task-project-credentials p {
+        display: block;
+        width: auto;
+        max-width: 100px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
+
+.billability-report-btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.billability-report-btn-group-left {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+/* project filter dropdown in billability report page */
+#project_chosen .chosen-choices {
+    max-height: 60px;
+    overflow-y: auto;
+}
