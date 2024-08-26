@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Services\ProjectCostService;
 use App\Services\ProjectService;
@@ -11,7 +13,6 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 class ActiveController extends Controller
 {
@@ -51,18 +52,8 @@ class ActiveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        $request->validate([
-            'project_name' => ['required', Rule::unique('projects', 'project_name')
-                ->whereNull('deleted_at')],
-            'client' => 'required',
-            'priority' => 'required',
-            'start_date' => 'required|date_format:d/m/Y',
-            'cost_type' => 'required',
-            'rate' => 'required',
-        ]);
-
         $project = $this->projectService->createProject($request);
         $this->projectService->createProjectAssignedUsers($project->id);
         $projects = Project::with('client')->orderBy('project_name', 'ASC')->paginate(15)->withPath('');
@@ -107,13 +98,14 @@ class ActiveController extends Controller
         $selectedProjectManagers = $this->projectService->getSelectedProjectManagers($projectManagersData);
         $tags = $this->projectService->getTags($projectManagersData);
         $parentTasks = $this->projectService->getParentTasks($id);
+        $isKanbanView = $this->projectService->projectKanbanView();
 
         $estimatedTime = $project->task->sum('estimated_time');
         $actualEstimatedTime = $project->task->sum('actual_estimated_time');
         $timeSpent = number_format($project->task->sum('time_spent'), 2);
         $showActualEstimateToUser = $this->taskService->canShowActualEstimateToUser();
 
-        return view('projects.view', compact('project', 'projectManagers', 'users', 'allTasks', 'parentTasks', 'upcomingTasks', 'ongoingTasks', 'completedTasks', 'archivedTasks', 'selectedProjectManagers', 'projectManagersData', 'estimatedTime', 'actualEstimatedTime', 'timeSpent', 'tags', 'admins', 'showActualEstimateToUser'));
+        return view('projects.view', compact('project', 'projectManagers', 'users', 'allTasks', 'parentTasks', 'upcomingTasks', 'ongoingTasks', 'completedTasks', 'archivedTasks', 'selectedProjectManagers', 'projectManagersData', 'estimatedTime', 'actualEstimatedTime', 'timeSpent', 'tags', 'admins', 'showActualEstimateToUser','isKanbanView'));
     }
 
     /**
@@ -144,20 +136,8 @@ class ActiveController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
-        $request->validate([
-            'edit_project_name' => ['required', Rule::unique('projects', 'project_name')
-                ->whereNull('deleted_at')->ignore($id)],
-            'edit_client' => 'required',
-            'edit_category' => 'required',
-            'edit_priority' => 'required',
-            'edit_start_date' => 'required|date_format:d/m/Y',
-            'edit_cost_type' => 'required',
-            'edit_rate' => 'required',
-            //'edit_end_date' => 'required|date_format:d/m/Y',
-        ]);
-
         $this->projectService->updateProject($request, $id);
         $this->projectService->deleteProjectAssignedUsers($id);
         $this->projectService->createProjectAssignedUsers($id);
@@ -276,13 +256,14 @@ class ActiveController extends Controller
         $projectManagersData = $this->projectService->getProjectManagersData($id);
         $selectedProjectManagers = $this->projectService->getSelectedProjectManagers($projectManagersData);
         $tags = $this->projectService->getTags();
+        $isKanbanView = $this->projectService->projectKanbanView();
 
         $estimatedTime = $project->task->sum('estimated_time');
         $actualEstimatedTime = $project->task->sum('actual_estimated_time');
         $timeSpent = $project->task->sum('time_spent');
         $showActualEstimateToUser = $this->taskService->canShowActualEstimateToUser();
 
-        $content = view('projects.show', compact('project', 'projectManagers', 'users', 'admins', 'allTasks', 'upcomingTasks', 'ongoingTasks', 'completedTasks', 'selectedProjectManagers', 'projectManagersData', 'estimatedTime', 'actualEstimatedTime', 'timeSpent', 'tags', 'showActualEstimateToUser'))->render();
+        $content = view('projects.show', compact('project', 'projectManagers', 'users', 'admins', 'allTasks', 'upcomingTasks', 'ongoingTasks', 'completedTasks', 'selectedProjectManagers', 'projectManagersData', 'estimatedTime', 'actualEstimatedTime', 'timeSpent', 'tags', 'showActualEstimateToUser', 'isKanbanView'))->render();
         $res = [
             'status' => 'Saved',
             'data' => $content,

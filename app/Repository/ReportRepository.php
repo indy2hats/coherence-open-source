@@ -87,53 +87,54 @@ class ReportRepository
 
     public function getTaskSessionTime($request)
     {
-        if ((! isset($request->taskId) && ! isset($request->userId)) ||
-           ((isset($request->taskId) && $request->taskId == '') && (isset($request->userId) && $request->userId == ''))) {
+        if ((!isset($request->taskId) && !isset($request->userId)) ||
+            ((isset($request->taskId) && $request->taskId == '') && (isset($request->userId) && $request->userId == ''))) {
             return [];
         }
+        
         $taskSessions = TaskSession::with('task', 'user')
-                    ->selectRaw('task_sessions.*, SUM(total) AS total_hours')
-                    ->join('tasks', 'task_sessions.task_id', '=', 'tasks.id')
-                    ->join('users', 'task_sessions.user_id', '=', 'users.id');
-
+            ->select('task_sessions.user_id', 'task_sessions.task_id', DB::raw('SUM(total) AS total_hours'))
+            ->join('tasks', 'task_sessions.task_id', '=', 'tasks.id')
+            ->join('users', 'task_sessions.user_id', '=', 'users.id');
+        
         if (isset($request->taskId) && $request->taskId != '') {
             $taskSessions->where('task_sessions.task_id', $request->taskId)
-                            ->groupBy('task_sessions.user_id')
-                            ->orderBy('user_id');
+                ->groupBy('task_sessions.user_id', 'task_sessions.task_id')
+                ->orderBy('user_id');
         }
-
+        
         if (isset($request->userId) && $request->userId != '') {
             $taskSessions->where('task_sessions.user_id', $request->userId)
-                         ->groupBy('task_sessions.task_id')
-                         ->orderBy('task_id');
+                ->groupBy('task_sessions.task_id', 'task_sessions.user_id')
+                ->orderBy('task_id');
         }
-
+        
         if (isset($request->daterange) && $request->daterange != '') {
             $fromDate = null;
             $toDate = null;
             $daterange = explode(' - ', $request->daterange);
             $toDate = Carbon::parse($daterange[1])->endOfDay()->toDateTimeString();
-
+        
             if ($daterange[0] == 'Invalid date') {
                 $taskSessions->where('task_sessions.created_at', '<=', "$toDate");
             } else {
                 $fromDate = Carbon::parse($daterange[0])->startOfDay()->toDateTimeString();
                 $taskSessions->whereBetween('task_sessions.created_at', ["$fromDate", "$toDate"]);
             }
-            $taskSessions->groupBy('task_sessions.user_id')
-                         ->orderBy('user_id');
+            $taskSessions->groupBy('task_sessions.user_id', 'task_sessions.task_id')
+                ->orderBy('user_id');
         }
-
+        
         if (isset($request->greaterThan) && $request->greaterThan != '') {
             $taskSessions->havingRaw('SUM(total) >= ?', [$request->greaterThan * 60]);
         }
-
+        
         if (isset($request->lessThan) && $request->lessThan != '') {
             $taskSessions->havingRaw('SUM(total) <= ?', [$request->lessThan * 60]);
         }
-
+        
         $taskSessions = $taskSessions->get();
-
+        
         return $taskSessions;
     }
 

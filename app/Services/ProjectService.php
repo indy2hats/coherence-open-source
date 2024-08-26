@@ -309,4 +309,9 @@ class ProjectService
     {
         return $this->projectRepository->getProjectWithUsers($id);
     }
+
+    public function projectKanbanView()
+    {
+        return $this->projectRepository->projectKanbanView();
+    }
 }

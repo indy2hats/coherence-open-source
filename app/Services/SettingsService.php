@@ -170,7 +170,6 @@ class SettingsService
     public function changeCurrency()
     {
         $currency = $this->settingsRepository->changeCurrency();
-        CurrencyConversion::dispatch($currency);
 
         return $currency;
     }
