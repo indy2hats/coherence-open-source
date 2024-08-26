@@ -105,7 +105,7 @@ class ActiveController extends Controller
         $timeSpent = number_format($project->task->sum('time_spent'), 2);
         $showActualEstimateToUser = $this->taskService->canShowActualEstimateToUser();
 
-        return view('projects.view', compact('project', 'projectManagers', 'users', 'allTasks', 'parentTasks', 'upcomingTasks', 'ongoingTasks', 'completedTasks', 'archivedTasks', 'selectedProjectManagers', 'projectManagersData', 'estimatedTime', 'actualEstimatedTime', 'timeSpent', 'tags', 'admins', 'showActualEstimateToUser','isKanbanView'));
+        return view('projects.view', compact('project', 'projectManagers', 'users', 'allTasks', 'parentTasks', 'upcomingTasks', 'ongoingTasks', 'completedTasks', 'archivedTasks', 'selectedProjectManagers', 'projectManagersData', 'estimatedTime', 'actualEstimatedTime', 'timeSpent', 'tags', 'admins', 'showActualEstimateToUser', 'isKanbanView'));
     }
 
     /**

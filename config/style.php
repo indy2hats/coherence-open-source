@@ -1,13 +1,12 @@
 <?php
 
 return [
-    'qa-feedback' =>
-    [
+    'qa-feedback' => [
         'severity' => [
             'high' => 'label-warning',
             'medium' => 'label-info',
             'low' => 'label-plain',
-            'critical'=> 'label-danger',
+            'critical' => 'label-danger',
             'default' => ''
         ],
     ]
