@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
   |--------------------------------------------------------------------------
@@ -555,3 +556,8 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::post('/save-subscription/{id}', 'HomeController@saveSubscription');
+
+//TODO::Remove this and InteriaTest file
+Route::get('/inertia-test', function () {
+    return Inertia::render('InertiaTest', ['version' => '1.1']);
+})->name('subscription');
