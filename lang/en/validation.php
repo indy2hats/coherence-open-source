@@ -173,8 +173,14 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'account_number' => [
+            'required_with' => 'The :attribute is required if Bank is added',
+        ],
+        'branch' => [
+            'required_with' => 'The :attribute is required if Bank is added',
+        ],
+        'ifsc' => [
+            'required_with' => 'The :attribute is required if Bank is added',
         ],
     ],
 
