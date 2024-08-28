@@ -8,6 +8,8 @@ use App\Traits\GeneralTrait;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class LoginController extends Controller
 {
@@ -41,6 +43,17 @@ class LoginController extends Controller
         $this->authService = $authService;
     }
 
+    /**
+     * This method is responsible for rendering the login form view using Inertia.
+     *
+     * @return \Inertia\Response
+     */
+    public function loginForm(): Response
+    {
+        // Render the 'Login' view using Inertia.
+        return Inertia::render('Login');
+    }
+
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -56,14 +69,14 @@ class LoginController extends Controller
         $token = request('email_token');
         if (! $token) {
             return  view('auth.login-verify')
-              ->with('error', 'Email Verification Token not provided.');
+                ->with('error', 'Email Verification Token not provided.');
         }
 
         $user = $this->getUserByEmailToken($token);
 
         if (! $user) {
             return view('auth.login-verify')
-              ->with('error', 'Invalid Email Verification Token.');
+                ->with('error', 'Invalid Email Verification Token.');
         }
 
         if (Carbon::now() >= Carbon::parse($user->email_token_expired_at)) {

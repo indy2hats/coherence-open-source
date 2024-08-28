@@ -73,11 +73,11 @@ class AuthService
             }
         }
 
-        return redirect(route('login'))
-          ->withInput($request->only('email'))
-          ->withErrors([
-              'password' => 'Invalid Credentials '
-          ]);
+        return redirect()
+            ->back()
+            ->withErrors([
+                'password' => 'Invalid Credentials '
+            ]);
     }
 
     public function generateSession($user)
