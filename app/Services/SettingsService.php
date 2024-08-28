@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Jobs\BaseCurrency\CurrencyConversion;
 use App\Models\WeekHoliday;
 use App\Repository\SettingsRepository;
 use App\Traits\GeneralTrait;
@@ -170,7 +169,6 @@ class SettingsService
     public function changeCurrency()
     {
         $currency = $this->settingsRepository->changeCurrency();
-        CurrencyConversion::dispatch($currency);
 
         return $currency;
     }
