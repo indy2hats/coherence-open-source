@@ -93,6 +93,7 @@
                             <div class="form-group">
                                 <label>Estimated Hours</label>
                                 <input class="form-control " type="text" name="estimated_hours" id="estimated_hours_id"> 
+                                <div class="text-danger text-left field-error" id="label_estimated_hours"></div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">
@@ -117,7 +118,7 @@
                         <div class="form-group">
                                 <label>URL</label>
                                 <input class="form-control" type="text" name="site_url" id="url_id">
-                                <div class="text-danger text-left field-error" id="label_url"></div>
+                                <div class="text-danger text-left field-error" id="label_site_url"></div>
                             </div>
                         </div>
                     </div>

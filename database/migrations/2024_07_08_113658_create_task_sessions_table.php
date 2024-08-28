@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('task_id')->index('task_sessions_task_id_foreign');
             $table->unsignedBigInteger('user_id')->index('task_sessions_user_id_foreign');
             $table->string('current_status', 191);
-            $table->dateTime('start_time');
+            $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
             $table->unsignedBigInteger('total')->nullable();
             $table->unsignedBigInteger('billed_today')->nullable();
