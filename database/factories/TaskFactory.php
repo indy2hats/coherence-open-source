@@ -18,12 +18,15 @@ class TaskFactory extends Factory
      */
     public function definition()
     {
+        $estimated_time = $this->faker->numberBetween(1, 40);
+
         return [
             'project_id' => Project::NotArchived()->inRandomOrder()->first()->id,
             'code' => $this->faker->unique()->numerify('T-##'),
             'title' => $this->faker->unique()->numerify('Task ##'),
             'priority' => $this->faker->randomElement(['High', 'Medium', 'Low']),
-            'estimated_time' => $this->faker->numberBetween($min = 1, $max = 40),
+            'estimated_time' => $estimated_time,
+            'actual_estimated_time' => $this->faker->numberBetween($estimated_time + 1, $estimated_time + 6),
             'description' => $this->faker->paragraph(1),
             'is_archived' => 0,
             'status' => 'Backlog',

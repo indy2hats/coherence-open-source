@@ -118,6 +118,11 @@ return [
                 'label' => 'Enable Daily Status Report',
                 'slug' => 'show_daily_status_report_page',
                 'value' => 1,
+            ],
+            'salary_currency' => [
+                'label' => 'Salary Currency',
+                'slug' => 'salary_currency',
+                'value' => 'USD',
             ]
         ]
     ],

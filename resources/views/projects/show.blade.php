@@ -117,7 +117,9 @@
                 <div class="task">
                     <!-- Task list blade -->
                     <h2 class="page-title" style="font-size: 25px;">Project Tasks 
-                        <a href="/agile-board/{{$project->id}}" class="btn btn-w-m btn-info">Kanban View</a>
+                        @if($isKanbanView)
+                            <a href="/agile-board/{{$project->id}}" class="btn btn-w-m btn-info">Kanban View</a>
+                        @endif
                     </h2>
                     @include('projects.task_list')
                 </div>
