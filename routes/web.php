@@ -17,7 +17,7 @@ use Inertia\Inertia;
 Route::group(['middleware' => 'web'], function () {
     Route::get('/login', 'Auth\LoginController@loginForm')->name('login');
     Route::post('/login', 'Auth\LoginController@login')->name('login-submit');
-    
+
     Route::post('/verify', 'Auth\LoginController@verifyEmail')->name('email-verify');
     Route::get('change-password', 'Auth\AccountSettings@resetPassword')->name('changePassword');
     Route::get('/get-leave/{id}', 'Leaves\Apply\ApplyLeaveController@getLeave')->name('getLeave');
@@ -557,8 +557,3 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::post('/save-subscription/{id}', 'HomeController@saveSubscription');
-
-//TODO::Remove this and InteriaTest file
-Route::get('/inertia-test', function () {
-    return Inertia::render('InertiaTest', ['version' => '1.1']);
-})->name('subscription');
