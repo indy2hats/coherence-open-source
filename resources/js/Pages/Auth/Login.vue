@@ -30,6 +30,9 @@ function submit() {
             <div class="logo-name">
                 <img :src="companyLogo" alt="company-logo" width="70%" />
             </div>
+            <div v-if="errors?.email_token" class="text-danger text-left">
+                {{ errors.email_token }}
+            </div>
             <form class="m-t" @submit.prevent="submit">
                 <div class="form-group">
                     <input

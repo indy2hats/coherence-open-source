@@ -68,7 +68,7 @@ class AuthService
                     $user->update(['email_token' => bin2hex(openssl_random_pseudo_bytes(4)), 'email_token_expired_at' => Carbon::now()->addMinutes(10)]);
                     $this->sendNotification($user, new AuthenticateUser($user));
 
-                    return view('auth.login-verify');
+                    return to_route('email-verify-form');
                 }
             }
         }
@@ -96,13 +96,15 @@ class AuthService
         $this->putSession('imgpath', $imgpath);
 
         if ($info->must_change_password) {
+            //TODO::convert this to vue
             return view('layout.changepassword');
         } else {
             if ($this->isClient()) {
+                //TODO::route not found
                 return redirect('/client-sheet');
             }
 
-            return redirect('/dashboard');
+            return to_route('dashboard');
         }
     }
 

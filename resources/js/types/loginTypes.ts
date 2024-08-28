@@ -6,5 +6,14 @@ export interface LoginForm {
 
 export interface LoginError {
     email?: string;
+    email_token?: string;
     password?: string;
+}
+
+export interface EmailVerifyForm {
+    email_token: string | null;
+}
+
+export interface EmailVerifyError {
+    email_token?: string;
 }

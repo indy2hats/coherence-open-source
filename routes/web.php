@@ -17,6 +17,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/login', 'Auth\LoginController@loginForm')->name('login');
     Route::post('/login', 'Auth\LoginController@login')->name('login-submit');
 
+    Route::get('/verify', 'Auth\LoginController@verifyEmailForm')->name('email-verify-form');
     Route::post('/verify', 'Auth\LoginController@verifyEmail')->name('email-verify');
     Route::get('change-password', 'Auth\AccountSettings@resetPassword')->name('changePassword');
     Route::get('/get-leave/{id}', 'Leaves\Apply\ApplyLeaveController@getLeave')->name('getLeave');
