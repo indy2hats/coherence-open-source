@@ -38,16 +38,15 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            'companyLogo' => fn() => Helper::getCompanyLogo(),
-            'auth.user' => fn() => $this->getUserData($request),
+            'companyLogo' => fn () => Helper::getCompanyLogo(),
+            'auth.user' => fn () => $this->getUserData($request),
         ]);
     }
 
     /**
      * Retrieve user data for the authenticated user.
      *
-     * @param \Illuminate\Http\Request $request The request object.
-     *
+     * @param  \Illuminate\Http\Request  $request  The request object.
      * @return \App\Models\User|null The user data or null if no user is authenticated.
      */
     private function getUserData(Request $request): ?User
