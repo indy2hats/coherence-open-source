@@ -23,8 +23,8 @@ function submit() {
         <div class="logo-name">
             <img :src="companyLogo" alt="company-logo" width="70%" />
         </div>
-        <p>Check Your Email</p>
-        <p>We have sent you an email with a code.</p>
+        <p>{{ $t("Check Your Email") }}</p>
+        <p>{{ $t("We have sent you an email with a code.") }}</p>
         <form class="form-horizontal" @submit.prevent="submit">
             <div v-if="errors?.email_token" class="text text-danger m-b">
                 {{ errors.email_token }}
@@ -36,7 +36,7 @@ function submit() {
                         name="email_token"
                         v-model="form.email_token"
                         class="form-control"
-                        placeholder="Enter Code"
+                        :placeholder="$t('Enter Code')"
                         required="true"
                     />
                 </div>
@@ -47,7 +47,7 @@ function submit() {
                         type="submit"
                         class="btn btn-success block full-width m-b"
                     >
-                        Submit
+                        {{ $t("Submit") }}
                     </button>
                 </div>
             </div>
@@ -56,7 +56,7 @@ function submit() {
                     :href="route('login')"
                     class="underline text-sm text-gray-600 hover:text-gray-900"
                 >
-                    Login another user?
+                    {{ $t("Login another user?") }}
                 </Link>
             </div>
         </form>

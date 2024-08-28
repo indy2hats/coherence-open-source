@@ -40,8 +40,9 @@ function submit() {
                         name="email"
                         v-model="form.email"
                         class="form-control"
-                        placeholder="Email"
+                        :placeholder="$t('Email')"
                         required="true"
+                        autocomplete="username"
                     />
                     <div v-if="errors?.email" class="text-danger text-left">
                         {{ errors.email }}
@@ -53,7 +54,8 @@ function submit() {
                         class="form-control"
                         name="password"
                         v-model="form.password"
-                        placeholder="Password"
+                        :placeholder="$t('Password')"
+                        autocomplete="current-password"
                         required="true"
                     />
                     <div v-if="errors?.password" class="text-danger text-left">
@@ -67,13 +69,13 @@ function submit() {
                         v-model="form.remember_me"
                         name="remember_me"
                     />
-                    <label for="box1">Remember Me</label>
+                    <label for="box1">{{ $t("Remember Me") }}</label>
                 </div>
                 <button
                     type="submit"
                     class="btn btn-success block full-width m-b"
                 >
-                    Login
+                    {{ $t("Login") }}
                 </button>
 
                 <div v-if="hasPasswordRequestRoute" class="form-group">
@@ -81,7 +83,7 @@ function submit() {
                         :href="route('password.request')"
                         class="underline text-sm text-gray-600 hover:text-gray-900"
                     >
-                        Forgot your password?
+                        {{ $t("Forgot your password?") }}
                     </Link>
                 </div>
             </form>
