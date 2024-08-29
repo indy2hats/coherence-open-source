@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::group(['middleware' => 'web'], function () {
-    Route::post('/login', 'Auth\LoginController@login');
-    Route::view('/login', 'layout.login')->name('login');
+    Route::get('/login', 'Auth\LoginController@loginForm')->name('login');
+    Route::post('/login', 'Auth\LoginController@login')->name('login-submit');
+
+    Route::get('/verify', 'Auth\LoginController@verifyEmailForm')->name('email-verify-form');
     Route::post('/verify', 'Auth\LoginController@verifyEmail')->name('email-verify');
     Route::get('change-password', 'Auth\AccountSettings@resetPassword')->name('changePassword');
     Route::get('/get-leave/{id}', 'Leaves\Apply\ApplyLeaveController@getLeave')->name('getLeave');
@@ -548,7 +550,7 @@ Route::group(['middleware' => 'web'], function () {
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::middleware(['guest'])->group(function () {
-    //Route::get('/forgot-password', 'Auth\ForgotPasswordController')->name('password.request');
+    Route::get('/forgot-password', 'Auth\ForgotPasswordController')->name('password.request');
     Route::post('/forgot-password', 'Auth\ForgotPasswordController@handle')->name('password.email');
     Route::get('/reset-password/{token}', 'Auth\ResetPasswordController@reset')->name('password.reset');
     Route::post('/reset-password', 'Auth\ResetPasswordController@handle')->name('password.update');
