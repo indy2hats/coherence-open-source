@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\ProjectAssignedUsers;
+use App\Models\Settings;
 use App\Models\Task;
 use App\Models\User;
 use App\Traits\GeneralTrait;
@@ -465,5 +466,10 @@ class ProjectRepository
     public function getProjectWithUsers($id)
     {
         return Project::with('projectUsers')->where('id', $id)->first();
+    }
+
+    public function projectKanbanView()
+    {
+        return Settings::where('slug', 'project_kanban_view')->value('value');
     }
 }
