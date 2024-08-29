@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 use PragmaRX\Google2FALaravel\Support\Authenticator;
 
 class AccountSettings extends Controller
@@ -93,6 +94,12 @@ class AccountSettings extends Controller
     public function resetPassword()
     {
         return view('profile.changepassword');
+    }
+
+    //TODO::remove
+    public function resetPasswordNew()
+    {
+        return Inertia::render('Profile/ChangePassword');
     }
 
     public function disableUserTwoFactorAuthentication(Request $request)

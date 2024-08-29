@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Helpers\Helper;
 use App\Models\User;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -40,6 +41,9 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'companyLogo' => fn () => Helper::getCompanyLogo(),
             'auth.user' => fn () => $this->getUserData($request),
+            'userPermissions' => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
+            'userRoles' => $request->user() ? $request->user()->role : [],
+            'breadcrumb' =>  Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
         ]);
     }
 
