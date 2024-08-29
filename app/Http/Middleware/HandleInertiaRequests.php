@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
             'auth.user' => fn () => $this->getUserData($request),
             'userPermissions' => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
             'userRoles' => $request->user() ? $request->user()->role : [],
-            'breadcrumb' =>  Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
+            'breadcrumb' => Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
         ]);
     }
 

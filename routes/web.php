@@ -20,7 +20,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/verify', 'Auth\LoginController@verifyEmailForm')->name('email-verify-form');
     Route::post('/verify', 'Auth\LoginController@verifyEmail')->name('email-verify');
     Route::get('change-password', 'Auth\AccountSettings@resetPassword')->name('changePassword');
-    Route::get('change-password-new', 'Auth\AccountSettings@resetPasswordNew')->name('changePassword-new');//TODO::remove this
+    Route::get('change-password-new', 'Auth\AccountSettings@resetPasswordNew')->name('changePassword-new'); //TODO::remove this
     Route::get('/get-leave/{id}', 'Leaves\Apply\ApplyLeaveController@getLeave')->name('getLeave');
     Route::get('/add-task-session', 'TaskSessionController@addTaskSession')->name('storeTaskSession');
 
