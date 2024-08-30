@@ -2,13 +2,14 @@
 import { computed, reactive } from "vue";
 import { Link, router, usePage } from "@inertiajs/vue3";
 import { EmailVerifyForm, EmailVerifyError } from "@/types/loginTypes";
+import { SiteSettings } from "@/types/siteSettingsTypes";
 
 defineProps<{
     errors: EmailVerifyError;
 }>();
 
 const page = usePage();
-const companyLogo = computed(() => page.props.companyLogo as string);
+const siteSettings = computed(() => page.props.siteSettings as SiteSettings);
 const form = reactive<EmailVerifyForm>({
     email_token: null,
 });
@@ -21,7 +22,7 @@ function submit() {
 <template>
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div class="logo-name">
-            <img :src="companyLogo" alt="company-logo" width="70%" />
+            <img :src="siteSettings.company_logo" alt="company-logo" width="70%" />
         </div>
         <p>{{ $t("Check Your Email") }}</p>
         <p>{{ $t("We have sent you an email with a code.") }}</p>

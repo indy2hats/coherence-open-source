@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { usePage } from "@inertiajs/vue3";
+import { SiteSettings } from "@/types/siteSettingsTypes";
 
 const page = usePage();
-const companyLogo = computed(() => page.props.companyLogo as string);
+const siteSettings = computed(() => page.props.siteSettings as SiteSettings);
 </script>
 
 <template>
@@ -11,7 +12,7 @@ const companyLogo = computed(() => page.props.companyLogo as string);
         <div class="header-wrap row align-items-center position-relative">
             <div class="header-left col-sm-2">
                 <a href="/dashboard" class="brand">
-                    <img :src="companyLogo" alt="logo" />
+                    <img :src="siteSettings.company_logo" alt="logo" />
                 </a>
             </div>
             <div class="header-right col-sm-10">

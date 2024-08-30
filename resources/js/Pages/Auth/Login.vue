@@ -2,13 +2,14 @@
 import { computed, reactive } from "vue";
 import { Link, router, usePage } from "@inertiajs/vue3";
 import { LoginForm, LoginError } from "@/types/loginTypes";
+import { SiteSettings } from "@/types/siteSettingsTypes";
 
 defineProps<{
     errors: LoginError;
 }>();
 
 const page = usePage();
-const companyLogo = computed(() => page.props.companyLogo as string);
+const siteSettings = computed(() => page.props.siteSettings as SiteSettings);
 const hasPasswordRequestRoute = computed(
     () => route().has("password.request") as boolean
 );
@@ -28,7 +29,7 @@ function submit() {
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div class="logo-name">
-                <img :src="companyLogo" alt="company-logo" width="70%" />
+                <img :src="siteSettings.company_logo" alt="company-logo" width="70%" />
             </div>
             <div v-if="errors?.email_token" class="text-danger text-left">
                 {{ errors.email_token }}

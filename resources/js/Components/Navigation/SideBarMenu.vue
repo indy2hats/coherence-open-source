@@ -2,10 +2,11 @@
 import { computed } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { usePermissions } from "@/composables/usePermissions";
+import { SiteSettings } from "@/types/siteSettingsTypes";
 const { can, hasRole, hasAnyRole, hasAllRoles, hasAllPermissions, hasAnyPermission } = usePermissions();
 
 const page = usePage();
-const companyLogo = computed(() => page.props.companyLogo as string);
+const siteSettings = computed(() => page.props.siteSettings as SiteSettings);
 </script>
 
 <template>
@@ -18,8 +19,7 @@ const companyLogo = computed(() => page.props.companyLogo as string);
                 <li class="nav-header">
                     <div class="profile-element">
                         <span class="avatar">
-                            <!-- dynamic -->
-                            <img id="header_pic" alt="image" class="img-circle" :src="companyLogo"
+                            <img id="header_pic" alt="logo" class="img-circle" :src="siteSettings.company_logo"
                                 style="width: 50px" />
                         </span>
                         <span class="user-basic">
@@ -35,7 +35,7 @@ const companyLogo = computed(() => page.props.companyLogo as string);
                     <!-- mobile view -->
                     <div class="logo-element">
                         <a href="">
-                            <img id="header_pic" alt="image" class="img-circle" :src="companyLogo" />
+                            <img id="header_pic" alt="logo" class="img-circle" :src="siteSettings.company_logo" />
                         </a>
                     </div>
                 </li>

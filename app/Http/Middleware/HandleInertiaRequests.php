@@ -39,11 +39,12 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            'companyLogo' => fn () => Helper::getCompanyLogo(),
-            'auth.user' => fn () => $this->getUserData($request),
-            'userPermissions' => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
-            'userRoles' => $request->user() ? $request->user()->role : [],
-            'breadcrumb' => Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
+            'auth.user' => fn() => $this->getUserData($request),
+            'breadcrumb' => fn() => Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
+            'companyLogo' => fn() => Helper::getCompanyLogo(),
+            'userPermissions' => fn() => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
+            'userRoles' => fn() => $request->user() ? $request->user()->role : [],
+            'siteSettings' => fn() => $this->getSiteSettings(),
         ]);
     }
 
@@ -67,5 +68,19 @@ class HandleInertiaRequests extends Middleware
                 'must_change_password' // Hide the must change password attribute.
             )
             : null;
+    }
+
+    /**
+     * Retrieve the site settings.
+     *
+     * @return array<string, mixed> The site settings.
+     */
+    private function getSiteSettings(): array
+    {
+        return [
+            'company_logo' => Helper::getCompanyLogo(),
+            'project_view' => Helper::getProjectView(),
+            'showDaily_status_report_page' => Helper::showDailyStatusReportPage(),
+        ];
     }
 }
