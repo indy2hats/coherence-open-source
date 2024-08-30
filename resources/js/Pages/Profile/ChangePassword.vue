@@ -4,10 +4,12 @@ import { Head } from '@inertiajs/vue3';
 import { Link, usePage } from "@inertiajs/vue3";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { usePermissions } from "@/composables/usePermissions";
+import { SiteSettings } from "@/types/site-settings-types";
 
 const page = usePage();
 const permissions = computed(() => page.props.user_permissions as string[]);
 const roles = computed(() => page.props.user_roles as string[]);
+const siteSettings = computed(() => page.props.site_settings as SiteSettings);
 const { can, hasRole, hasAnyRole, hasAllRoles, hasAllPermissions, hasAnyPermission } = usePermissions();
 </script>
 
@@ -28,7 +30,7 @@ const { can, hasRole, hasAnyRole, hasAllRoles, hasAllPermissions, hasAnyPermissi
     {{ hasAllPermissions(['view-user-access-levels']) }}
     {{ hasAnyPermission(['view-user-access-ledvels','dfdfd']) }}
     ddd
-
+    {{ siteSettings.show_daily_status_report_page }}
     {{ route().current('changePassword-new') }}
   </AppLayout>
 </template>

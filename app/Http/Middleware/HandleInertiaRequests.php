@@ -79,7 +79,8 @@ class HandleInertiaRequests extends Middleware
         return [
             'company_logo' => Helper::getCompanyLogo(),
             'project_view' => Helper::getProjectView(),
-            'showDaily_status_report_page' => Helper::showDailyStatusReportPage(),
+            'santa_enabled' => config('general.santa.enabled', false),
+            'show_daily_status_report_page' => Helper::showDailyStatusReportPage(),
         ];
     }
 }

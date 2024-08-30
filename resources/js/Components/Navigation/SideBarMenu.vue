@@ -250,13 +250,13 @@ const siteSettings = computed(() => page.props.site_settings as SiteSettings);
                                 </li>
                             </ul>
                         </li>
-                        <!-- TODO::check this -->
-                        <!-- @if(!empty(Helper::showDailyStatusReportPage())) -->
-                        <li :class="{ 'active': route().current('dailyStatusReport') }">
+
+                        <li :class="{ 'active': route().current('dailyStatusReport') }"
+                            v-if="siteSettings.show_daily_status_report_page">
                             <a href="" data-toggle="tooltip" data-placement="right"
                                 title="Employee Daily Status Report">Daily Status Report</a>
                         </li>
-                        <!-- @endif -->
+
                         <li :class="{ 'active': route().current('userLeaveReport') }">
                             <a href="" data-toggle="tooltip" data-placement="right"
                                 title="Employee Leave Report">Employee Leave Report</a>
@@ -272,289 +272,273 @@ const siteSettings = computed(() => page.props.site_settings as SiteSettings);
                     </ul>
                 </li>
 
-                <!-- @can('manage-payroll') -->
-                <li class="">
+                <li :class="{ 'active': route().current('payroll.*') || route().current('payrollUpdate') || route().current('payroll-user.*') || route().current('payrollUserIndex') || route().current('salary-component.index') || route().current('salary-hike.*') || route().current('employeeHikeHistory') }"
+                    v-if="can('manage-payroll')">
                     <a href="#" data-toggle="tooltip" data-placement="right" title="Payroll">
                         <i class="ri-bill-line"></i>
                         <span class="nav-label"> Payroll</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li class="">
+                        <li
+                            :class="{ 'active': route().current('payroll.*') || route().current('payrollUpdate') || route().current('payroll-user.*') }">
                             <a href="">Manage Payroll</a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('salary-component.index') }">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Salary Components">Salary
                                 Components</a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('salary-hike.*') }">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Salary Hike">Salary Hike</a>
                         </li>
                     </ul>
                 </li>
-                <!-- @endcan -->
 
-                <!-- @can('view-payslip') -->
-                <li class="">
+                <li :class="{ 'active': route().current('payslip.*') }" v-if="can('view-payslip')">
                     <a href="" data-toggle="tooltip" data-placement="right" title="Payslip">
                         <i class="ri-wallet-3-line"></i>
                         <span class="nav-label">Payslip</span>
                     </a>
                 </li>
-                <!-- @endcan -->
 
-                <!-- @canany(['users', 'view-clients']) -->
-                <li class="">
+                <li :class="{ 'active': route().current('users.index') || route().current('clients.index') }"
+                    v-if="hasAnyPermission(['users', 'view-clients'])">
                     <a href="#" data-toggle="tooltip" data-placement="right" title="Users">
                         <i class="ri-group-line"></i>
                         <span class="nav-label">Users</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <!-- @can('view-users') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('users.index') }" v-if="can('view-users')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Users">
                                 Users
                             </a>
                         </li>
-                        <!-- @endcan -->
-                        <!-- @can('view-clients') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('clients.index') }" v-if="can('view-clients')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Clients">
                                 Clients
                             </a>
                         </li>
-                        <!-- @endcan -->
                     </ul>
                 </li>
-                <!-- @endcanany -->
 
-                <!-- @canany(['view-holidays', 'view-newsletters']) -->
-                <li class="">
+                <li :class="{ 'active': route().current('newsletters.index') || route().current('manage-holidays.index') || route().current('alerts.index') || route().current('recruitments.index') || route().current('listSchedules') }"
+                    v-if="hasAnyPermission(['view-holidays', 'view-newsletters'])">
                     <a href="#" data-toggle="tooltip" data-placement="right" title="Miscellaneous">
                         <i class="ri-function-line"></i>
                         <span class="nav-label">Miscellaneous</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <!-- @can('view-holidays') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('manage-holidays.index') }" v-if="can('view-holidays')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Holidays">
                                 Holidays
                             </a>
                         </li>
-                        <!-- @endcan -->
-                        <!-- @can('view-newsletters') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('newsletters.index') }" v-if="can('view-newsletters')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Newsletters">
                                 Newsletters
                             </a>
                         </li>
-                        <!-- @endcan -->
-                        <!-- @can('manage-alerts') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('alerts.index') }" v-if="can('manage-alerts')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Manage Popup Alerts">
                                 Manage Popup Alerts
                             </a>
                         </li>
-                        <!-- @endcan -->
-                        <!-- @can('manage-recruitments') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('recruitments.index') }"
+                            v-if="can('manage-recruitments')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Recruitments">
                                 Recruitments
                             </a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('listSchedules') }" v-if="can('manage-recruitments')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Recruitment Schedules">
                                 Recruitment Schedules
                             </a>
                         </li>
-                        <!-- @endcan -->
                     </ul>
                 </li>
-                <!-- @endcanany -->
 
-                <!-- @canany(['manage-assets','view-assets']) -->
-                <li class="">
+                <li :class="{ 'active': route().current('assets.*') || route().current('asset-types.index') || route().current('asset-vendors.index') || route().current('ticket-status.index') || route().current('attributes.index') }"
+                    v-if="hasAnyPermission(['manage-assets', 'view-assets'])">
                     <a href="#" data-toggle="tooltip" data-placement="right" title="Assets">
                         <i class="ri-home-line"></i>
                         <span class="nav-label">IT Assets</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
-                        <!-- @can('manage-assets') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('assets.*') }" v-if="can('manage-assets')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Assets">Assets
                             </a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('asset-types.index') || route().current('attributes.index') }"
+                            v-if="can('manage-assets')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Types">Types
                             </a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('asset-vendors.index') }" v-if="can('manage-assets')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Vendors">Vendors
                             </a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('assets.ticketRaisedAssetList') || route().current('assets.ticket-raised-asset-search') }"
+                            v-if="can('manage-assets')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Tickets">Tickets
                             </a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('ticket-status.index') }" v-if="can('manage-assets')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="Ticket Status">Ticket Status
                             </a>
                         </li>
-                        <!-- @endcan -->
-                        <!-- @unlessrole('administrator|client|consultant') -->
-                        <!-- @can('view-assets') -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('assets.employeeAssetList') }"
+                            v-if="!hasAnyRole(['administrator', 'client', 'consultant']) && can('view-assets')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="My Assets">My Assets
                             </a>
                         </li>
-                        <li class="">
+                        <li :class="{ 'active': route().current('assets.employeeTicketRaisedAssetList') || route().current('assets.employee-ticket-raised-asset-search') }"
+                            v-if="!hasAnyRole(['administrator', 'client', 'consultant']) && can('view-assets')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="My Tickets">My Tickets
                             </a>
                         </li>
-                        <!-- @endcan -->
-                        <!-- @endunlessrole -->
                     </ul>
                 </li>
-                <!-- @endcanany -->
 
-                <!-- @unlessrole('client|consultant') -->
-                <!-- @canany(['apply-leave', 'manage-leave']) -->
-                <li class="">
-                    <a href="#" data-toggle="tooltip" data-placement="right" title="Leaves">
-                        <i class="ri-file-add-line"></i>
-                        <span class="nav-label">Leaves</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <!-- @can('apply-leave') -->
-                        <li class="">
-                            <a href="#" data-toggle="tooltip" data-placement="right" title="Apply">
-                                Apply
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li class="">
-                                    <a href="" data-toggle="tooltip" data-placement="right" title="Apply Leave">
-                                        Apply Leave
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="" data-toggle="tooltip" data-placement="right" title="Apply Compensatory">
-                                        Apply Compensatory Off
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- @endcan -->
-                        <!-- @can('manage-leave') -->
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Pending Applications">Pending
-                                Applications</a>
-                        </li>
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right"
-                                title="Approved Applications">Approved Applications</a>
-                        </li>
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Assign Leave">Assign
-                                Leave</a>
-                        </li>
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right"
-                                title="Compensatory Applications">Compensatory Applications</a>
-                        </li>
-                        <!-- @endcan -->
-                    </ul>
-                </li>
-                <!-- @endcanany -->
-                <!-- @endunlessrole -->
+                <template
+                    v-if="!hasAnyRole(['client', 'consultant']) && hasAnyPermission(['apply-leave', 'manage-leave'])">
 
-                <!-- @canany(['view-user-access-levels','view-overheads','view-fixed-overheads','manage-settings']) -->
-                <li class="">
+                    <li
+                        :class="{ 'active': route().current('apply-leave.index') || route().current('adminIndex') || route().current('previousApplications') || route().current('assignLeave') || route().current('compensations.index') || route().current('compensatoryApplications') }">
+                        <a href="#" data-toggle="tooltip" data-placement="right" title="Leaves">
+                            <i class="ri-file-add-line"></i>
+                            <span class="nav-label">Leaves</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+
+                            <li :class="{ 'active': route().current('apply-leave.index') || route().current('compensations.index') }"
+                                v-if="can('apply-leave')">
+                                <a href="#" data-toggle="tooltip" data-placement="right" title="Apply">
+                                    Apply
+                                    <span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+                                    <li :class="{ 'active': route().current('apply-leave.index') }">
+                                        <a href="" data-toggle="tooltip" data-placement="right" title="Apply Leave">
+                                            Apply Leave
+                                        </a>
+                                    </li>
+                                    <li :class="{ 'active': route().current('compensations.index') }">
+                                        <a href="" data-toggle="tooltip" data-placement="right"
+                                            title="Apply Compensatory">
+                                            Apply Compensatory Off
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <template v-if="can('manage-leave')">
+                                <li :class="{ 'active': route().current('adminIndex') }">
+                                    <a href="" data-toggle="tooltip" data-placement="right"
+                                        title="Pending Applications">Pending
+                                        Applications</a>
+                                </li>
+                                <li :class="{ 'active': route().current('previousApplications') }">
+                                    <a href="" data-toggle="tooltip" data-placement="right"
+                                        title="Approved Applications">Approved Applications</a>
+                                </li>
+                                <li :class="{ 'active': route().current('assignLeave') }">
+                                    <a href="" data-toggle="tooltip" data-placement="right" title="Assign Leave">Assign
+                                        Leave</a>
+                                </li>
+                                <li :class="{ 'active': route().current('compensatoryApplications') }">
+                                    <a href="" data-toggle="tooltip" data-placement="right"
+                                        title="Compensatory Applications">Compensatory Applications</a>
+                                </li>
+                            </template>
+                        </ul>
+                    </li>
+                </template>
+
+                <li :class="{ 'active': route().current('company-info') || route().current('project-technologies.index') || route().current('user-access-levels') || route().current('overheads.index') || route().current('session-types.index') || route().current('fixed-overhead.index') || route().current('base-currency.index') || route().current('reports.index') || route().current('project.index') }"
+                    v-if="hasAnyPermission(['view-user-access-levels', 'view-overheads', 'view-fixed-overheads',
+                        'manage-settings'])">
                     <a href="#" data-toggle="tooltip" data-placement="right" title="Settings">
                         <i class="ri-settings-5-line"></i>
                         <span class="nav-label">Settings</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <!-- @can(['manage-settings']) -->
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Company Information">Company
-                                Information</a>
-                        </li>
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Project Technologies">Project
-                                Technologies</a>
-                        </li>
-                        <!-- @endcan -->
-                        <!-- @canany(['view-overheads', 'view-fixed-overheads']) -->
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Overheads">Overheads &
+                        <template v-if="can('manage-settings')">
+                            <li :class="{ 'active': route().current('company-info') }">
+                                <a href="" data-toggle="tooltip" data-placement="right"
+                                    title="Company Information">Company
+                                    Information</a>
+                            </li>
+                            <li :class="{ 'active': route().current('project-technologies.index') }">
+                                <a href="" data-toggle="tooltip" data-placement="right"
+                                    title="Project Technologies">Project
+                                    Technologies</a>
+                            </li>
+                        </template>
+
+                        <li :class="{ 'active': route().current('overheads.index') || route().current('fixed-overhead.index') }"
+                            v-if="hasAnyPermission(['view-overheads', 'view-fixed-overheads'])">
+
+                            <a href="" data-toggle=" tooltip" data-placement="right" title="Overheads">Overheads &
                                 Expenses</a>
                             <ul class="nav nav-third-level">
-                                <!-- @can(['view-overheads']) -->
-                                <li class="">
+                                <li :class="{ 'active': route().current('overheads.index') }"
+                                    v-if="can('view-overheads')">
                                     <a href="" data-toggle="tooltip" data-placement="right"
-                                        title="Overheads & Expenses">Manage Expenses</a>
+                                        title="Overheads & Expenses">Manage
+                                        Expenses</a>
                                 </li>
-                                <!-- @endcan -->
-                                <!-- @can(['view-fixed-overheads']) -->
-                                <li class="">
+                                <li :class="{ 'active': route().current('fixed-overhead.index') }"
+                                    v-if="can('view-fixed-overheads')">
                                     <a href="" data-toggle="tooltip" data-placement="right" title="Manage Overheads">
                                         Fixed Overheads</a>
                                 </li>
                             </ul>
                         </li>
-                        <!-- @endcanany -->
-                        <!-- @can(['view-user-access-levels']) -->
-                        <li class="">
+                        <li :class="{ 'active': route().current('user-access-levels') }"
+                            v-if="can('view-user-access-levels')">
                             <a href="" data-toggle="tooltip" data-placement="right" title="User Access Levels">User
                                 Access Levels</a>
                         </li>
-                        <!-- @endcan -->
-                        <!-- @can(['manage-settings']) -->
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Session Types">Session
-                                Types</a>
-                        </li>
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Base Currency">Base
-                                Currency</a>
-                        </li>
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Report Settings">Report
-                                Settings</a>
-                        </li>
-                        <li class="">
-                            <a href="" data-toggle="tooltip" data-placement="right" title="Project Settings">Project
-                                Settings</a>
-                        </li>
-                        <!-- @endcan -->
+                        <template v-if="can('manage-settings')">
+                            <li :class="{ 'active': route().current('session-types.index') }">
+                                <a href="" data-toggle="tooltip" data-placement="right" title="Session Types">Session
+                                    Types</a>
+                            </li>
+                            <li :class="{ 'active': route().current('base-currency.index') }">
+                                <a href="" data-toggle="tooltip" data-placement="right" title="Base Currency">Base
+                                    Currency</a>
+                            </li>
+                            <li :class="{ 'active': route().current('reports.index') }">
+                                <a href="" data-toggle="tooltip" data-placement="right" title="Report Settings">Report
+                                    Settings</a>
+                            </li>
+                            <li :class="{ 'active': route().current('project.index') }">
+                                <a href="" data-toggle="tooltip" data-placement="right" title="Project Settings">Project
+                                    Settings</a>
+                            </li>
+                        </template>
                     </ul>
                 </li>
-                <!-- @endcanany -->
-                <!-- @if(config('general.santa.enabled')) -->
-                <!-- @hasanyrole('hr-manager|hr-associate') -->
-                <li class="">
-                    <a href="" data-toggle="tooltip" data-placement="right" title="Santa Members">
-                        <i class="fa fa-tree" aria-hidden="true"></i>
-                        <span class="nav-label">Santa Members</span>
-                    </a>
-                </li>
-                <!-- @endhasanyrole -->
 
-                <!-- @unlessrole('client|consultant') -->
-                <li class="">
-                    <a href="" data-toggle="tooltip" data-placement="right" title="Secret Santa">
-                        <i class="fa fa-tree" aria-hidden="true"></i>
-                        <span class="nav-label">Secret Santa</span>
-                    </a>
-                </li>
-                <!-- @endunlessrole -->
-                <!-- @endif -->
+                <template v-if="siteSettings.santa_enabled">
+                    <li class="" v-if="hasAnyRole(['hr-manager', 'hr-associate'])">
+                        <a href="" data-toggle="tooltip" data-placement="right" title="Santa Members">
+                            <i class="fa fa-tree" aria-hidden="true"></i>
+                            <span class="nav-label">Santa Members</span>
+                        </a>
+                    </li>
+
+                    <li class="" v-if="!hasAnyRole(['client', 'consultant'])">
+                        <a href="" data-toggle="tooltip" data-placement="right" title="Secret Santa">
+                            <i class="fa fa-tree" aria-hidden="true"></i>
+                            <span class="nav-label">Secret Santa</span>
+                        </a>
+                    </li>
+                </template>
             </ul>
         </div>
     </nav>
