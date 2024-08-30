@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { usePermissions } from "@/composables/usePermissions";
-import { SiteSettings } from "@/types/siteSettingsTypes";
+import { SiteSettings } from "@/types/site-settings-types";
 const { can, hasRole, hasAnyRole, hasAllRoles, hasAllPermissions, hasAnyPermission } = usePermissions();
 
 const page = usePage();

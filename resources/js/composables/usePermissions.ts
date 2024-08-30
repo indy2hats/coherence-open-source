@@ -1,6 +1,6 @@
 import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
-import { Role } from "@/types/roleTypes";
+import { Role } from "@/types/role-types";
 
 export function usePermissions() {
     // Access the permissions and roles from the page props

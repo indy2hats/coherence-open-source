@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, reactive } from "vue";
 import { Link, router, usePage } from "@inertiajs/vue3";
-import { LoginForm, LoginError } from "@/types/loginTypes";
-import { SiteSettings } from "@/types/siteSettingsTypes";
+import { LoginForm, LoginError } from "@/types/login-types";
+import { SiteSettings } from "@/types/site-settings-types";
 
 defineProps<{
     errors: LoginError;

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, reactive } from "vue";
 import { Link, router, usePage } from "@inertiajs/vue3";
-import { EmailVerifyForm, EmailVerifyError } from "@/types/loginTypes";
-import { SiteSettings } from "@/types/siteSettingsTypes";
+import { EmailVerifyForm, EmailVerifyError } from "@/types/login-types";
+import { SiteSettings } from "@/types/site-settings-types";
 
 defineProps<{
     errors: EmailVerifyError;

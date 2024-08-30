@@ -41,7 +41,6 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth.user' => fn() => $this->getUserData($request),
             'breadcrumb' => fn() => Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
-            'companyLogo' => fn() => Helper::getCompanyLogo(),
             'userPermissions' => fn() => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
             'userRoles' => fn() => $request->user() ? $request->user()->role : [],
             'siteSettings' => fn() => $this->getSiteSettings(),

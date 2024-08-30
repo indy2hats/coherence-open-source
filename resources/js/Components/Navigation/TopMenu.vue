@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { usePage } from "@inertiajs/vue3";
-import { SiteSettings } from "@/types/siteSettingsTypes";
+import { SiteSettings } from "@/types/site-settings-types";
 
 const page = usePage();
 const siteSettings = computed(() => page.props.siteSettings as SiteSettings);
