@@ -10,7 +10,7 @@ class Helper
     {
         $companyLogo = Settings::where('slug', 'company_logo')->first();
 
-        return $companyLogo->value ? 'storage/' . $companyLogo->value : 'images/default-logo.png';
+        return $companyLogo->value ? 'storage/'.$companyLogo->value : 'images/default-logo.png';
     }
 
     public static function showDailyStatusReportPage(): bool
