@@ -7,11 +7,10 @@ export function usePermissions() {
     const page = usePage();
 
     // Correctly type the computed properties
-    const permissions = computed(() => page.props.userPermissions as string[]);
-    // const roles = computed(() => page.props.userRoles as Role[]);
+    const permissions = computed(() => page.props.user_permissions as string[]);
 
     const roles = computed<Role[]>(() => {
-        const userRoles = page.props.userRoles;
+        const userRoles = page.props.user_roles;
 
         // Ensure userRoles is an array
         if (Array.isArray(userRoles)) {

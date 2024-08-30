@@ -6,8 +6,8 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { usePermissions } from "@/composables/usePermissions";
 
 const page = usePage();
-const permissions = computed(() => page.props.userPermissions as string[]);
-const roles = computed(() => page.props.userRoles as string[]);
+const permissions = computed(() => page.props.user_permissions as string[]);
+const roles = computed(() => page.props.user_roles as string[]);
 const { can, hasRole, hasAnyRole, hasAllRoles, hasAllPermissions, hasAnyPermission } = usePermissions();
 </script>
 

@@ -9,7 +9,7 @@ defineProps<{
 }>();
 
 const page = usePage();
-const siteSettings = computed(() => page.props.siteSettings as SiteSettings);
+const siteSettings = computed(() => page.props.site_settings as SiteSettings);
 const form = reactive<EmailVerifyForm>({
     email_token: null,
 });

@@ -6,7 +6,7 @@ import { SiteSettings } from "@/types/site-settings-types";
 const { can, hasRole, hasAnyRole, hasAllRoles, hasAllPermissions, hasAnyPermission } = usePermissions();
 
 const page = usePage();
-const siteSettings = computed(() => page.props.siteSettings as SiteSettings);
+const siteSettings = computed(() => page.props.site_settings as SiteSettings);
 </script>
 
 <template>
