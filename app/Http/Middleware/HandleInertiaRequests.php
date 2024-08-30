@@ -39,11 +39,11 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            'auth.user' => fn() => $this->getUserData($request),
-            'breadcrumb' => fn() => Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
-            'user_permissions' => fn() => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
-            'user_roles' => fn() => $request->user() ? $request->user()->role : [],
-            'site_settings' => fn() => $this->getSiteSettings(),
+            'auth.user' => fn () => $this->getUserData($request),
+            'breadcrumb' => fn () => Breadcrumbs::exists() ? Breadcrumbs::generate() : [],
+            'user_permissions' => fn () => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
+            'user_roles' => fn () => $request->user() ? $request->user()->role : [],
+            'site_settings' => fn () => $this->getSiteSettings(),
         ]);
     }
 
